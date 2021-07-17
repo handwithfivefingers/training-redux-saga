@@ -1,19 +1,23 @@
 import { withStyles } from '@material-ui/core';
-import React, { Component } from 'react';
-import style from './style';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Button from '@material-ui/core/button';
+import CardContent from '@material-ui/core/CardContent';
+import Fab from '@material-ui/core/Fab';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import { toastError } from '../../helper/toastHelper';
+import * as TaskActions from './../../actions/task';
+import style from './style';
 class TaskItem extends Component {
   render() {
-    const { task, classes, status } = this.props;
-    const { id, name, des } = task;
+    const { task, classes, status, onClickEdit, OnClickDelete } = this.props;
+    const { id, title, description } = task;
     return (
       <Card key={id} className={classes.card}>
         <CardContent>
@@ -25,7 +29,7 @@ class TaskItem extends Component {
                 component="h2"
                 gutterBottom
               >
-                {name}
+                {title}
               </Typography>
             </Grid>
             <Grid item md={4}>
@@ -42,21 +46,34 @@ class TaskItem extends Component {
               color="textSecondary"
               gutterBottom
             >
-              {des}
+              {description}
             </Typography>
           </Grid>
         </CardContent>
         <CardActions className={classes.cardAction}>
-          <Fab color="primary" size="small">
-            <EditIcon fontSize="12" />
+          <Fab color="primary" size="small" onClick={onClickEdit}>
+            <EditIcon />
           </Fab>
-          <Fab color="secondary" size="small">
-            <DeleteIcon fontSize="12" />
+          <Fab color="secondary" size="small" onClick={OnClickDelete}>
+            <DeleteIcon />
           </Fab>
         </CardActions>
       </Card>
     );
   }
 }
+TaskItem.propTypes = {
+  classes: PropTypes.object,
+  status: PropTypes.string,
+  task: PropTypes.object,
+  id: PropTypes.number,
+  description: PropTypes.string,
+  title: PropTypes.string,
+  onClickEdit: PropTypes.func,
+  OnClickDelete: PropTypes.func,
+};
+const mapStateToProps = null;
+const mapDispatchToProps = null;
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default withStyles(style)(TaskItem);
+export default compose(withStyles(style), withConnect)(TaskItem);

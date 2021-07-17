@@ -4,5 +4,8 @@ const style = () => ({
     alignItem: 'center',
     justifyContent: 'flex-end',
   },
+  card: {
+    margin: 6,
+  },
 });
 export default style;

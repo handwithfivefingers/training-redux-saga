@@ -1,0 +1,45 @@
+.seat-system-table {
+  display: block;
+  border-collapse: collapse;
+}
+.seat-system-table tbody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.seat-system-table tbody td {
+  width: 50px;
+  height: 50px;
+  /* padding: 50px 30px; */
+  border: 2px solid #333;
+  text-align: center;
+  float: left;
+  margin: 4px;
+  position: relative;
+  border-radius: 100%;
+}
+.seat-system-table tbody td:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+.seat-system-table tbody td button {
+  position: abosulute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #333;
+  content: '';
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  border-radius: 100%;
+}
+.reserved {
+  background: #333;
+  color: #fff;
+  display: inline-block;
+}
+.available {
+  color: #333;
+}
